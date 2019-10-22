@@ -1,17 +1,9 @@
 import React from 'react'
 
-// const car = () => {
-//   return (
-//     <h2>This is Car component.</h2>
-//   )
-// }
-
-// const car = () => <h2>This is Car component.</h2>
-
-// export default car
-export default () => (
+export default (props) => (
   <h2>
-    This is Car component.
-    <strong>StrongText</strong>
+    <h3>Car title: { props.name }</h3>
+    <p>Car year: <strong>{ props.year }</strong></p>
+    { props.children }
   </h2>
 )
