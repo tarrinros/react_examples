@@ -9,20 +9,20 @@ class App extends Component {
       {name: 'Audi', year: '2016'},
       {name: 'Mazda', year: '1999'}
     ],
-    pageTitle: 'React components'
+    pageTitle: 'React components',
+    showCars: false
   }
 
-  changeTitleHandler = (newTitle) => {
+  changeTitleHandler = (pageTitle) => {
+    this.setState({pageTitle})
+  }
+
+  toggleCarsHandler = () => {
     this.setState({
-      pageTitle: newTitle
+      showCars: !this.state.showCars
     })
   }
 
-  handleInput = (event) => {
-    this.setState({
-      pageTitle: event.target.value
-    })
-  }
 
   render() {
     const myStyle = {
@@ -33,37 +33,22 @@ class App extends Component {
       <div className="App" style={myStyle}>
         <h1>{this.state.pageTitle}</h1>
 
-        <input type='text' onChange={this.handleInput}>
-        </input>
+        <button onClick={this.toggleCarsHandler}
+        >Toggle Cars</button>
 
-        <button onClick={this.changeTitleHandler.bind(this, 'Changed!')}
-        >Change title</button>
-
-        { this.state.cars.map((car, index) => { 
-          return (
-            <Car 
-            key={index}
-            name={car.name} 
-            year={car.year}
-            onChangeTitle={this.changeTitleHandler.bind(this, car.name)}
-          />
-          )
-        }) }
-        {/* <Car 
-          name={cars[0].name} 
-          year={cars[0].year}
-          onChangeTitle={this.changeTitleHandler.bind(this, cars[0].name)}
-        />
-        <Car 
-          name={cars[1].name} 
-          year={cars[1].year}
-          onChangeTitle={() => this.changeTitleHandler(cars[1].name)}
-        />
-        <Car 
-          name={cars[2].name} 
-          year={cars[2].year}
-          onChangeTitle={() => this.changeTitleHandler(cars[2].name)}
-        /> */}
+        { this.state.showCars ?
+          this.state.cars.map((car, index) => { 
+            return (
+              <Car 
+              key={index}
+              name={car.name} 
+              year={car.year}
+              onChangeTitle={this.changeTitleHandler.bind(this, car.name)}
+            />
+            )
+          })
+          : null 
+        }
       </div>
     );
   }
