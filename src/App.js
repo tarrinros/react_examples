@@ -23,10 +23,24 @@ class App extends Component {
     })
   }
 
-
   render() {
     const myStyle = {
       textAlign: 'center'
+    }
+
+    let cars = null
+
+    if (this.state.showCars) {
+      cars = this.state.cars.map((car, index) => { 
+                return (
+                  <Car 
+                  key={index}
+                  name={car.name} 
+                  year={car.year}
+                  onChangeTitle={this.changeTitleHandler.bind(this, car.name)}
+                />
+                )
+              })
     }
   
     return (
@@ -36,19 +50,7 @@ class App extends Component {
         <button onClick={this.toggleCarsHandler}
         >Toggle Cars</button>
 
-        { this.state.showCars ?
-          this.state.cars.map((car, index) => { 
-            return (
-              <Car 
-              key={index}
-              name={car.name} 
-              year={car.year}
-              onChangeTitle={this.changeTitleHandler.bind(this, car.name)}
-            />
-            )
-          })
-          : null 
-        }
+        { cars }
       </div>
     );
   }
