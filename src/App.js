@@ -13,13 +13,33 @@ class App extends Component {
     showCars: false
   }
 
-  changeTitleHandler = (pageTitle) => {
-    this.setState({pageTitle})
-  }
-
   toggleCarsHandler = () => {
     this.setState({
       showCars: !this.state.showCars
+    })
+  }
+
+  onChangeName (name, index) {
+    const car = this.state.cars[index]
+    car.name = name
+    // Clone array from the state
+    const cars = [...this.state.cars]
+    // Add the new state of car to the cloned array
+    cars[index] = car
+
+    this.setState({
+      cars: cars
+    })
+  }
+
+  deleteHandler (index) {
+    const cars = [...this.state.cars]
+    // Delete element of array cars 
+    // Splice  - first parameter is a start index, second - amount of deleted elements
+    cars.splice(index, 1)
+
+    this.setState({
+      cars: cars
     })
   }
 
@@ -37,7 +57,8 @@ class App extends Component {
                   key={index}
                   name={car.name} 
                   year={car.year}
-                  onChangeTitle={this.changeTitleHandler.bind(this, car.name)}
+                  onChangeName={event => this.onChangeName(event.target.value, index)}
+                  onDelete={this.deleteHandler.bind(this, index)}
                 />
                 )
               })
