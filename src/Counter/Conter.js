@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Auxillary from '../hoc/Auxillary'
+import Auxiliary from '../hoc/Auxiliary'
 
 class Counter extends Component {
   state = {
@@ -7,25 +7,34 @@ class Counter extends Component {
   }
 
   upCounter = () => {
-    this.setState({
-      counter: this.state.counter + 1
+    this.setState((prevState)=>{
+      return {
+        counter: prevState.counter - 1
+      }
     })
   }
 
-  downCounter = (state) => {
-    this.setState({
-      counter: this.state.counter - 1
+  downCounter = () => {
+    // this.setState({
+    //   counter: this.state.counter - 1
+    // })
+
+    // This method saves from changing object with nonvalid state
+    this.setState((prevState)=>{
+      return {
+        counter: prevState.counter - 1
+      }
     })
   }
 
   render() {
     return(
       // React Fragment is using to avoid additional div on the top
-      <Auxillary>
+      <Auxiliary>
         <h2>Counter {this.state.counter}</h2>
         <button onClick={this.upCounter}>+</button>
         <button onClick={this.downCounter}>-</button>
-      </Auxillary>  
+      </Auxiliary>  
     )
 
     // return [        

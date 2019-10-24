@@ -77,7 +77,6 @@ class App extends Component {
                       onDelete={this.deleteHandler.bind(this, index)}
                     />
                   </ErrorBoundary>
-                 
                 )
               })
     }
