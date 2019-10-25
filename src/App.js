@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import Car from './Car/Car'
 import ErrorBoundary from './ErrorBoundary/ErrorBoundary'
 import Counter from './Counter/Conter'
-import './App.scss';
+import classes from './App.module.scss';
+console.log(classes)
 
 class App extends Component {
   constructor(props) {
@@ -73,6 +74,7 @@ class App extends Component {
                     <Car 
                       name={car.name} 
                       year={car.year}
+                      index={index}
                       onChangeName={event => this.onChangeName(event.target.value, index)}
                       onDelete={this.deleteHandler.bind(this, index)}
                     />
@@ -82,14 +84,14 @@ class App extends Component {
     }
   
     return (
-      <div className="App" style={myStyle}>
+      <div className={classes.App} style={myStyle}>
         <h1>{this.state.pageTitle}</h1>
 
         <Counter/>
         <hr/>
         <button 
           onClick={this.toggleCarsHandler}
-          className={'AppButton'}
+          className={classes['AppButton']}
         >Toggle Cars</button>
 
         <div style={{
